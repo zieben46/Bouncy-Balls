@@ -120,87 +120,87 @@ public class Game extends JPanel {
 		//g2d.fillOval(Spring.getX(), Spring.getY(), 11, 10);
 	}
 
-	public static void main(String[] args) throws InterruptedException {
-		frameHeight=700;
-		frameWidth=700;
-		frame = new JFrame("Bouncy Balls");
-		Game game = new Game();
-		myBallRad=1;
-		manyBallsRad=35;
-		frame.add(game);
+	// public static void main(String[] args) throws InterruptedException {
+	// 	frameHeight=700;
+	// 	frameWidth=700;
+	// 	frame = new JFrame("Bouncy Balls");
+	// 	Game game = new Game();
+	// 	myBallRad=1;
+	// 	manyBallsRad=35;
+	// 	frame.add(game);
 
-		frame.setSize(frameWidth, frameHeight);
+	// 	frame.setSize(frameWidth, frameHeight);
 
-		BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
-		Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
-				cursorImg, new Point(0, 0), "blank cursor");
-		frame.getContentPane().setCursor(blankCursor);
+	// 	BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+	// 	Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+	// 			cursorImg, new Point(0, 0), "blank cursor");
+	// 	frame.getContentPane().setCursor(blankCursor);
 
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	// 	frame.setVisible(true);
+	// 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		makeManyBalls();
-		//myBall=new Ball(400,400,Color.BLACK);
-		//pi=new PointerInfo(frame,null);
-		//makeFireBall();
-		//Spring = new Spring(30,30,2,2,Color.BLACK);
+	// 	makeManyBalls();
+	// 	//myBall=new Ball(400,400,Color.BLACK);
+	// 	//pi=new PointerInfo(frame,null);
+	// 	//makeFireBall();
+	// 	//Spring = new Spring(30,30,2,2,Color.BLACK);
 
-		frame.addMouseListener(new MouseListener() {
+	// 	frame.addMouseListener(new MouseListener() {
 
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("MOUSE X : "+mouseX);
-				System.out.println("MOUSE Y : "+mouseY);
-				//System.out.println("myBall X : "+myBall.getX());
-				//System.out.println("myBall Y : "+myBall.getY());
+	// 		@Override
+	// 		public void mouseClicked(MouseEvent e) {
+	// 			System.out.println("MOUSE X : "+mouseX);
+	// 			System.out.println("MOUSE Y : "+mouseY);
+	// 			//System.out.println("myBall X : "+myBall.getX());
+	// 			//System.out.println("myBall Y : "+myBall.getY());
 
-				//System.out.println("MY CLICK IS HERE:"+e.getX()+"  "+e.getY());
-				//System.out.println("MY DOT IS HERE:"+x+"  "+y);
-			}
-			public void mouseEntered(MouseEvent e) {
-				//converge(e.getX(),e.getY());
-				//myBall.setX(e.getX());
-				//myBall.setY(e.getY());
-			}
-			public void mouseExited(MouseEvent e) {
-			}
-			public void mousePressed(MouseEvent e) {
-				//converge(e.getX(),e.getY());
+	// 			//System.out.println("MY CLICK IS HERE:"+e.getX()+"  "+e.getY());
+	// 			//System.out.println("MY DOT IS HERE:"+x+"  "+y);
+	// 		}
+	// 		public void mouseEntered(MouseEvent e) {
+	// 			//converge(e.getX(),e.getY());
+	// 			//myBall.setX(e.getX());
+	// 			//myBall.setY(e.getY());
+	// 		}
+	// 		public void mouseExited(MouseEvent e) {
+	// 		}
+	// 		public void mousePressed(MouseEvent e) {
+	// 			//converge(e.getX(),e.getY());
 
-				if (SwingUtilities.isLeftMouseButton(e)) {
-					converge(mouseX,mouseY,1);
-				} else {
-					converge(mouseX,mouseY,-1.05);
-				}
+	// 			if (SwingUtilities.isLeftMouseButton(e)) {
+	// 				converge(mouseX,mouseY,1);
+	// 			} else {
+	// 				converge(mouseX,mouseY,-1.05);
+	// 			}
 
-			}
-			public void mouseReleased(MouseEvent e) {
-			}
-		});
-		JOptionPane.showMessageDialog(null, "Eat the blue dots and dodge the red dots.  Left click brings 'em closer,"
-				+ " right click repels.  You have 100 health.  Good luck!", "", JOptionPane.INFORMATION_MESSAGE);
-		while (true) {
-			mouse = MouseInfo.getPointerInfo().getLocation();
-			mouseX=(int) (mouse.getX()-8);
-			mouseY=(int) (mouse.getY()-31);
-			//myBall.setX(mouseX);
-			//myBall.setY(mouseY);
-			game.moveStuff();
-			detectHit();
-			game.repaint();
+	// 		}
+	// 		public void mouseReleased(MouseEvent e) {
+	// 		}
+	// 	});
+	// 	JOptionPane.showMessageDialog(null, "Eat the blue dots and dodge the red dots.  Left click brings 'em closer,"
+	// 			+ " right click repels.  You have 100 health.  Good luck!", "", JOptionPane.INFORMATION_MESSAGE);
+	// 	while (true) {
+	// 		mouse = MouseInfo.getPointerInfo().getLocation();
+	// 		mouseX=(int) (mouse.getX()-8);
+	// 		mouseY=(int) (mouse.getY()-31);
+	// 		//myBall.setX(mouseX);
+	// 		//myBall.setY(mouseY);
+	// 		game.moveStuff();
+	// 		detectHit();
+	// 		game.repaint();
 
-			Thread.sleep(10);
-			//ballList.remove(removeBall);
-			if (testWinner()==true) {
-				JOptionPane.showMessageDialog(null, "You win!", "", JOptionPane.INFORMATION_MESSAGE);
-				break;
-			}
-			if (isDead()==true) {
-				JOptionPane.showMessageDialog(null, "You are dead!", "", JOptionPane.INFORMATION_MESSAGE);
-				break;
-			}
-		} 
-	}
+	// 		Thread.sleep(10);
+	// 		//ballList.remove(removeBall);
+	// 		if (testWinner()==true) {
+	// 			JOptionPane.showMessageDialog(null, "You win!", "", JOptionPane.INFORMATION_MESSAGE);
+	// 			break;
+	// 		}
+	// 		if (isDead()==true) {
+	// 			JOptionPane.showMessageDialog(null, "You are dead!", "", JOptionPane.INFORMATION_MESSAGE);
+	// 			break;
+	// 		}
+	// 	} 
+	// }
 
 	public static void testWall() {
 		for (Ball ball:ballList) {
