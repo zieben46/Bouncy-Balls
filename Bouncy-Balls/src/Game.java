@@ -124,7 +124,7 @@ public class Game extends JPanel {
 	// 	frameHeight=700;
 	// 	frameWidth=700;
 	// 	frame = new JFrame("Bouncy Balls");
-	// 	Game game = new Game();
+	// 	Game game = new Game();git config --global user.name
 	// 	myBallRad=1;
 	// 	manyBallsRad=35;
 	// 	frame.add(game);
